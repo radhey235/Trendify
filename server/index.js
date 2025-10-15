@@ -21,7 +21,22 @@ app.use(cors({
 // Body parser
 app.use(express.json());
 
-// Routes
+// Root route - ADD THIS
+app.get("/", (req, res) => {
+  res.json({
+    message: "Welcome to Trendify API",
+    status: "Server is running successfully",
+    version: "1.0.0",
+    endpoints: {
+      users: "/api/v1/users",
+      products: "/api/v1/products",
+      cart: "/api/v1/cart",
+      orders: "/api/v1/order"
+    }
+  });
+});
+
+// API Routes
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/cart", cartRouter);
