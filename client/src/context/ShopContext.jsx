@@ -14,7 +14,10 @@ export const ShopProvider = ({ children }) => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/api/v1/products/all");
+        const res = await axios.get(
+  `${import.meta.env.VITE_API_URL}/api/v1/products/all`
+);
+
         // Sort products by date descending (newest first)
         const sortedProducts = res.data.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
