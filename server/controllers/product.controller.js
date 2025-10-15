@@ -21,42 +21,4 @@ export const getProductById = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
-};
-
-// Add single product with Cloudinary images
-export const addProduct = async (req, res) => {
-  try {
-    const { name, description, price, category } = req.body;
-    const images = req.files?.map(file => file.path) || [];
-
-    const product = new Product({
-      name,
-      description,
-      price,
-      category,
-      image: images,
-    });
-
-    await product.save();
-    res.status(201).json({ message: "Product added successfully", product });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-// Bulk add products (with image URLs only)
-export const addProductsBulk = async (req, res) => {
-  try {
-    const products = req.body; // array of product objects
-
-    if (!Array.isArray(products)) {
-      return res.status(400).json({ message: "Send an array of products" });
-    }
-
-    const savedProducts = await Product.insertMany(products);
-    res.status(201).json({ message: "Products added successfully", products: savedProducts });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+  }}

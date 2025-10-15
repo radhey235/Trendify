@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
 const Cart = () => {
-  const { cart, removeFromCart, clearCart } = useCart();
+  const { cart, removeFromCart, clearCart, updateQuantity } = useCart();
 
   if (cart.length === 0) {
     return (
@@ -36,10 +36,26 @@ const Cart = () => {
               />
               <div>
                 <h3 className="font-semibold">{item.name}</h3>
-                <p className="text-gray-600">
-                  ${item.price} x {item.quantity}
-                </p>
+                <p className="text-gray-600">${item.price} x {item.quantity}</p>
                 <p className="text-gray-500 text-sm">{item.category}</p>
+
+                {/* Quantity controls */}
+                <div className="flex items-center mt-2 gap-2">
+                  <button
+                    onClick={() => updateQuantity(item._id, item.quantity - 1)}
+                    disabled={item.quantity <= 1}
+                    className="bg-gray-300 px-2 rounded hover:bg-gray-400 transition"
+                  >
+                    -
+                  </button>
+                  <span className="px-2">{item.quantity}</span>
+                  <button
+                    onClick={() => updateQuantity(item._id, item.quantity + 1)}
+                    className="bg-gray-300 px-2 rounded hover:bg-gray-400 transition"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
             <button

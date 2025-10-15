@@ -30,13 +30,9 @@ const Product = () => {
       <div className="grid md:grid-cols-2 gap-10">
         <div className="flex flex-col items-center">
           <img
-            src={
-              product.image
-                ? `${imageBaseUrl}${product.image}`
-                : "https://placehold.co/600x400"
-            }
-            alt={product.name}
-            className="rounded-lg shadow-md w-full object-cover"
+              src={product.image && product.image.length > 0 ? product.image[0] : "https://via.placeholder.com/300"} // fallback image
+              alt={product.name}
+              className="h-48 w-full object-contain mb-4 rounded-md"
           />
         </div>
 

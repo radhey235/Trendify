@@ -26,7 +26,7 @@ const LatestCollection = () => {
           >
             <Link to={`/product/${item._id}`}>
               <img
-                src={item.image?.[0] || 'https://placehold.co/400x300'}
+                src={item.image && item.image.length > 0 ? item.image[0] : "https://via.placeholder.com/300"} // fallback image
                 alt={item.name}
                 className="h-48 w-full object-contain mb-4 rounded-md"
               />

@@ -1,8 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 import userRouter from './routes/user.route.js'
 import productRouter from'./routes/product.route.js'
@@ -19,10 +17,8 @@ app.use(cors({
 }));
 app.use(express.json());
 const PORT = process.env.PORT || 5000;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-app.use("/images", express.static(path.join(__dirname, "public/images")));
+app.use(express.static('dist'))
 app.get('/api/v1',(request,response)=>{
     response.send("server")
 })
