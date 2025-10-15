@@ -13,21 +13,20 @@ connectDB();
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",                
-  "https://trendify-1-fk7d.onrender.com" 
-];
-
+// CORS middleware
 app.use(cors({
-  origin: allowedOrigins // if you use cookies or auth
-});
+  origin: "https://trendify-1-fk7d.onrender.com"
+}));
 
+// Body parser
 app.use(express.json());
 
+// Routes
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/cart", cartRouter);
 app.use("/api/v1/order", orderRouter);
 
+// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
